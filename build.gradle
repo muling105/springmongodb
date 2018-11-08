@@ -1,0 +1,35 @@
+
+plugins {
+    id 'java'
+}
+
+group 'com.ztes'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    mavenCentral()
+}
+
+dependencies {
+    compile group:'org.springframework.boot', name:'spring-boot-starter-web', version:'2.0.6.RELEASE'
+    compile group:'org.springframework.boot', name:'spring-boot-starter-data-mongodb', version:'2.0.5.RELEASE'
+    compile 'org.projectlombok:lombok:1.18.4'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.0.6.RELEASE'
+}
+
+
+//解决创建项目时没有src/main/java资源文件的任务
+task "create-dirs" << {
+    sourceSets*.java.srcDirs*.each{
+        it.mkdirs()
+    }
+    sourceSets*.resources.srcDirs*.each{
+        it.mkdirs()
+    }
+}
+
